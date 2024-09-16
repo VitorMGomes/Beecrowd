@@ -7,3 +7,70 @@ A entrada é dada pelo número de países participantes N (0 ≤ N ≤ 500) segu
 Saída
 A saída deve ser a lista de países, com suas medalhas de ouro, prata e bronze, na ordem correta do quadro de medalhas, com as nações mais premiadas aparecendo primeiro.
 */
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+struct Pais
+{
+    char nome[20];
+    int ouros;
+    int pratas;
+    int bronzes;
+
+}typedef Pais;
+
+int compare(Pais a, Pais b)
+{
+    int aux;
+
+    aux = a.ouros - b.ouros;
+
+    if(aux == 0)
+    {
+        aux = a.pratas - b.pratas;
+    }
+
+    if(aux == 0)
+    {
+        aux = a.bronzes - b.bronzes;
+    }
+
+    return aux;
+}
+
+
+int main()
+{
+    int rep;
+    scanf("%d", &rep);
+
+    Pais paises[rep];
+
+    for(int i = 0; i < rep; i++)
+    {
+        scanf(" %s %d %d %d", paises[i].nome, &paises[i].ouros, &paises[i].pratas, &paises[i].bronzes);
+    }
+
+    //bubble sort
+
+    for(int i = 0; i < rep - 1; i++)
+    {
+        for(int j = 0; j < rep - 1 - i; j++)
+        {
+            if(compare(paises[j], paises[j+1]) < 0)
+            {
+                Pais temp = paises[j];
+                paises[j] = paises[j+1];
+                paises[j + 1] = temp;
+            }
+        }
+    }
+
+    for(int i = 0; i < rep; i++)
+    {
+        printf("%s %d %d %d\n", paises[i].nome, paises[i].ouros, paises[i].pratas, paises[i].bronzes);
+    }
+
+}
