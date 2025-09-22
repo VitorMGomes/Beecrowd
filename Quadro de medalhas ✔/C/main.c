@@ -37,6 +37,11 @@ int compare(Pais a, Pais b)
         aux = a.bronzes - b.bronzes;
     }
 
+    if(aux == 0)
+    {
+        aux = strcmp(a,b);
+    }
+
     return aux;
 }
 
